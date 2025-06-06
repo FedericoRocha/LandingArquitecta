@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
             </div>
             
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl text-[#111827] font-bold mb-6 leading-tight">
-              Tamara <span className="text-[#2C3E50]">Gomez</span>
+              Tamara <span className="text-[#2C3E50]">Goméz</span>
             </h1>
             
             <div className="mb-8">
@@ -52,12 +52,19 @@ const Hero: React.FC = () => {
             </div>
           </div>
           
-          {/* Imagen de perfil o proyecto destacado */}
+          {/* Imagen de arquitectura */}
           <div className="relative hidden md:block">
             <div className="relative z-10 w-full h-96 bg-[#F4F4F5] rounded-2xl overflow-hidden shadow-2xl transform rotate-2">
-              {/* Aquí iría la imagen de perfil o proyecto destacado */}
-              <div className="w-full h-full flex items-center justify-center text-[#6B7280]">
-                <span className="text-lg">Imagen destacada</span>
+              <img 
+                src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+                alt="Diseño arquitectónico moderno"
+                className="w-full h-full object-cover object-center"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <h3 className="font-serif text-2xl font-bold mb-2">Diseño Arquitectónico</h3>
+                <p className="text-sm opacity-90">Innovación y elegancia en cada proyecto</p>
               </div>
             </div>
             <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-[#D6B77A] rounded-2xl -z-0"></div>

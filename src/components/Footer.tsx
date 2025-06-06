@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiInstagram, FiLinkedin, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
+import ScrollLink from './ScrollLink';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -90,20 +91,40 @@ const Footer: React.FC = () => {
                 <span className="absolute bottom-0 left-0 w-10 h-0.5 bg-[#D6B77A]"></span>
               </h4>
               <ul className="space-y-3">
-                {column.items.map((item, itemIndex) => (
-                  <li key={itemIndex}>
-                    <motion.a
-                      href={item.href}
-                      target={item.href.startsWith('http') ? '_blank' : '_self'}
-                      rel={item.href.startsWith('http') ? 'noopener noreferrer' : ''}
-                      className="flex items-center text-[#6B7280] hover:text-[#D6B77A] transition-colors"
-                      whileHover={{ x: 5 }}
-                    >
-                      {item.icon && <span className="mr-2">{item.icon}</span>}
-                      <span>{item.text}</span>
-                    </motion.a>
-                  </li>
-                ))}
+                {column.items.map((item, itemIndex) => {
+                  // Si el enlace es un hash (navegación interna), usamos ScrollLink
+                  if (item.href.startsWith('#')) {
+                    return (
+                      <li key={itemIndex}>
+                        <motion.div whileHover={{ x: 5 }}>
+                          <ScrollLink 
+                            to={item.href.substring(1)} 
+                            className="flex items-center text-[#6B7280] hover:text-[#D6B77A] transition-colors"
+                          >
+                            {item.icon && <span className="mr-2">{item.icon}</span>}
+                            <span>{item.text}</span>
+                          </ScrollLink>
+                        </motion.div>
+                      </li>
+                    );
+                  }
+                  
+                  // Para enlaces externos, usamos un enlace normal
+                  return (
+                    <li key={itemIndex}>
+                      <motion.a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center text-[#6B7280] hover:text-[#D6B77A] transition-colors"
+                        whileHover={{ x: 5 }}
+                      >
+                        {item.icon && <span className="mr-2">{item.icon}</span>}
+                        <span>{item.text}</span>
+                      </motion.a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

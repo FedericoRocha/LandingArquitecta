@@ -1,6 +1,7 @@
 import React from 'react';
 import SectionWrapper from '../components/SectionWrapper';
 import Button from '../components/Button';
+import perfilImage from '../assets/images/perfil.jpeg';
 
 const About: React.FC = () => {
   return (
@@ -20,19 +21,21 @@ const About: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Columna de la imagen */}
           <div className="relative">
-            <div className="relative z-10 overflow-hidden rounded-lg shadow-2xl">
-              <img 
-                src="/src/assets/react.svg" 
-                alt="Tamara Gomez - Arquitecta" 
-                className="w-full h-auto object-cover transition-transform duration-700 hover:scale-105"
-              />
+            <div className="relative z-10 overflow-hidden rounded-lg shadow-2xl w-full h-[28rem] flex items-center justify-center bg-gray-50 p-4 transition-transform duration-700 hover:scale-105 hover:shadow-xl">
+              <div className="w-full h-full relative">
+                <img 
+                  src={perfilImage} 
+                  alt="Tamara Gómez - Arquitecta" 
+                  className="w-full h-full object-contain"
+                />
+              </div>
             </div>
             <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-[#D6B77A] rounded-lg -z-0"></div>
             
             {/* Experiencia destacada */}
-            <div className="absolute -bottom-6 -left-6 bg-white p-6 shadow-xl rounded-lg z-20 max-w-xs">
-              <div className="text-4xl font-bold text-[#2C3E50] mb-2">4+</div>
-              <div className="text-sm text-[#6B7280]">Años de experiencia en diseño arquitectónico</div>
+            <div className="absolute -bottom-4 -left-4 bg-white p-4 shadow-lg rounded-lg z-20 max-w-[200px]">
+              <div className="text-3xl font-bold text-[#2C3E50] mb-1">4+</div>
+              <div className="text-xs text-[#6B7280]">Años de experiencia en diseño arquitectónico</div>
             </div>
           </div>
 
