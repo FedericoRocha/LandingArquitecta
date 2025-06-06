@@ -52,9 +52,11 @@ const Projects: React.FC = () => {
   const [, setHoveredProject] = React.useState<number | null>(null);
 
   return (
-    <SectionWrapper id="proyectos" className="py-24 bg-white relative overflow-hidden">
-      {/* Elemento decorativo */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D6B77A] to-[#2C3E50]"></div>
+    <SectionWrapper 
+      id="proyectos" 
+      className="py-24 bg-white overflow-hidden"
+      withTopDivider
+    >
       
       <div className="max-w-7xl mx-auto px-6">
         {/* Encabezado */}

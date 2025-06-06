@@ -1,10 +1,15 @@
 import React from 'react';
 import Button from '../components/Button';
 import SectionWrapper from '../components/SectionWrapper';
+import ScrollLink from '../components/ScrollLink';
 
 const Hero: React.FC = () => {
   return (
-    <SectionWrapper id="hero" className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
+    <SectionWrapper 
+      id="hero" 
+      className="min-h-screen flex items-center justify-center bg-white overflow-hidden"
+      withTopDivider
+    >
       {/* Fondo con formas geométricas sutiles */}
       <div className="absolute inset-0 z-0 opacity-10">
         <div className="absolute top-1/4 -right-20 w-96 h-96 bg-[#D6B77A] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
@@ -37,18 +42,22 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <Button 
-                variant="primary" 
-                className="bg-[#2C3E50] hover:bg-[#1F2937] text-white px-8 py-4 text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
-              >
-                Ver mis proyectos
-              </Button>
-              <Button 
-                variant="primary" 
-                className="border-2 border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white px-8 py-4 text-lg transition-all duration-300"
-              >
-                Contactame
-              </Button>
+              <ScrollLink to="proyectos" className="block">
+                <Button 
+                  variant="primary" 
+                  className="bg-[#2C3E50] hover:bg-[#1F2937] text-white px-8 py-4 text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                >
+                  Ver mis proyectos
+                </Button>
+              </ScrollLink>
+              <ScrollLink to="contacto" className="block">
+                <Button 
+                  variant="primary" 
+                  className="border-2 border-[#2C3E50] text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white px-8 py-4 text-lg transition-all duration-300"
+                >
+                  Contáctame
+                </Button>
+              </ScrollLink>
             </div>
           </div>
           
@@ -72,8 +81,8 @@ const Hero: React.FC = () => {
         </div>
       </div>
       
-      {/* Elemento decorativo flotante */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      {/* Indicador de scroll (solo escritorio) */}
+      <div className="hidden lg:block absolute bottom-6 left-1/2 transform -translate-x-1/2 translate-y-4 animate-bounce">
         <div className="w-10 h-16 border-2 border-[#2C3E50] rounded-full flex justify-center p-2">
           <div className="w-1 h-3 bg-[#2C3E50] rounded-full animate-pulse"></div>
         </div>
