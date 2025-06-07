@@ -64,15 +64,14 @@ const Contact: React.FC = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
             >
-              {/* Borde dorado */}
-              <div className="absolute inset-0 border-3 border-transparent group-hover:border-[#D6B77A] transition-all duration-500 rounded-xl pointer-events-none z-0"></div>
+              {/* Borde dorado fijo */}
+              <div className="absolute inset-0 border-2 border-[#D6B77A] rounded-xl pointer-events-none z-0"></div>
               
-              {/* Efecto de brillo al hacer hover */}
+              {/* Efecto de brillo sutil */}
               <div 
-                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                className="absolute inset-0 rounded-xl pointer-events-none"
                 style={{
-                  boxShadow: 'inset 0 0 30px rgba(214, 183, 122, 0.2)',
-                  border: '1px solid rgba(214, 183, 122, 0.3)'
+                  boxShadow: 'inset 0 0 20px rgba(214, 183, 122, 0.15)'
                 }}
               ></div>
               

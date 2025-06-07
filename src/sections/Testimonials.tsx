@@ -33,7 +33,6 @@ const testimonials = [
 
 const Testimonials: React.FC = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [swiping, setSwiping] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState(0);
 
   const nextTestimonial = useCallback(() => {
@@ -51,28 +50,15 @@ const Testimonials: React.FC = () => {
     setCurrentTestimonial(index);
   };
 
-  // Configuración para el deslizamiento táctil
+  // Configuración mejorada para el deslizamiento táctil
   const handlers = useSwipeable({
-    onSwipedLeft: () => {
-      if (!swiping) {
-        nextTestimonial();
-      }
-      setSwiping(false);
-    },
-    onSwipedRight: () => {
-      if (!swiping) {
-        prevTestimonial();
-      }
-      setSwiping(false);
-    },
-    onSwiping: () => {
-      setSwiping(true);
-    },
-    trackMouse: false,
-    trackTouch: true,
+    onSwipedLeft: () => nextTestimonial(),
+    onSwipedRight: () => prevTestimonial(),
     preventScrollOnSwipe: true,
+    trackTouch: true,
+    trackMouse: false,
     delta: 10,
-    swipeDuration: 500,
+    swipeDuration: 300,
     touchEventOptions: { passive: true },
   });
 
@@ -113,22 +99,23 @@ const Testimonials: React.FC = () => {
             <FiChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Testimonial activo */}
+          {/* Testimonial activo - Contenedor de deslizamiento */}
           <div 
-            className="relative min-h-[320px] md:min-h-[280px] flex items-center touch-none"
+            className="relative w-full flex items-center py-8"
             {...handlers}
           >
-            <AnimatePresence mode="wait" custom={swipeDirection}>
-              <motion.div
-                key={currentTestimonial}
-                custom={swipeDirection}
-                initial={{ opacity: 0, x: swipeDirection > 0 ? 100 : -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: swipeDirection > 0 ? -100 : 100 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="relative bg-white rounded-2xl shadow-xl p-8 md:p-10 w-full overflow-hidden group"
-              >
-              {/* Borde dorado */}
+            <div className="w-full">
+              <AnimatePresence mode="wait" custom={swipeDirection}>
+                <motion.div
+                  key={currentTestimonial}
+                  custom={swipeDirection}
+                  initial={{ opacity: 0, x: swipeDirection > 0 ? 100 : -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: swipeDirection > 0 ? -100 : 100 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative bg-white rounded-2xl shadow-xl p-6 md:p-8 w-full group" style={{ minHeight: 'auto' }}
+                >
+                {/* Borde dorado */}
               <div className="absolute inset-0 border-3 border-transparent group-hover:border-[#D6B77A] transition-all duration-500 rounded-2xl pointer-events-none z-0"></div>
               
               {/* Efecto de brillo al hacer hover */}
@@ -147,8 +134,9 @@ const Testimonials: React.FC = () => {
                   boxShadow: '0 0 20px rgba(214, 183, 122, 0.2)'
                 }}
               ></div>
-              <div className="flex flex-col md:flex-row items-center h-full">
-                <div className="w-full md:w-1/3 mb-6 md:mb-0 md:pr-8">
+              <div className="flex flex-col md:flex-row items-start gap-6">
+                {/* Imagen de perfil */}
+                <div className="w-full md:w-1/3 flex flex-col items-center">
                   <div className="bg-gradient-to-br from-[#2C3E50] to-[#D6B77A] p-1 rounded-full inline-block">
                     <div className="bg-white p-1 rounded-full">
                       <div className="w-24 h-24 bg-gray-200 rounded-full overflow-hidden">
@@ -159,9 +147,12 @@ const Testimonials: React.FC = () => {
                     </div>
                   </div>
                 </div>
+                
+                {/* Contenido del testimonio */}
                 <div className="w-full md:w-2/3 flex flex-col h-full">
-                  <div className="flex-1">
-                    <div className="flex mb-4">
+                  <div className="flex flex-col gap-4">
+                    {/* Estrellas de valoración */}
+                    <div className="flex justify-center md:justify-start mb-4">
                       {[...Array(5)].map((_, i) => (
                         <FiStar 
                           key={i} 
@@ -169,22 +160,31 @@ const Testimonials: React.FC = () => {
                         />
                       ))}
                     </div>
-                    <blockquote className="text-lg text-[#4B5563] italic mb-6">
+                    
+                    {/* Texto del testimonio */}
+                    <blockquote className="text-base md:text-lg text-[#4B5563] italic mb-6 text-center md:text-left">
                       "{testimonials[currentTestimonial].text}"
                     </blockquote>
-                  </div>
-                  <div className="border-t border-gray-100 pt-4 mt-auto">
-                    <p className="font-bold text-[#2C3E50]">{testimonials[currentTestimonial].author}</p>
-                    <p className="text-sm text-[#6B7280]">
-                      {testimonials[currentTestimonial].role}
-                      <span className="mx-2">•</span>
-                      {testimonials[currentTestimonial].project}
-                    </p>
+                    
+                    {/* Información del autor */}
+                    <div className="mt-auto">
+                      <div className="border-t border-gray-100 pt-4">
+                        <p className="font-bold text-[#2C3E50] text-center md:text-left">
+                          {testimonials[currentTestimonial].author}
+                        </p>
+                        <p className="text-sm text-[#6B7280] text-center md:text-left">
+                          {testimonials[currentTestimonial].role}
+                          <span className="mx-2">•</span>
+                          {testimonials[currentTestimonial].project}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               </motion.div>
-            </AnimatePresence>
+              </AnimatePresence>
+            </div>
           </div>
 
           {/* Indicadores */}
