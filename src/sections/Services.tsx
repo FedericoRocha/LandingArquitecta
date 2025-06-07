@@ -56,13 +56,36 @@ const Services: React.FC = () => (
       </div>
 
       {/* Grid de servicios */}
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-8 relative z-10">
         {services.map((service, idx) => (
           <div 
             key={idx}
-            className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+            className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1.5"
+            style={{
+              background: 'rgba(255, 255, 255, 0.7)',
+              backdropFilter: 'blur(10px)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
           >
-            <div className="p-8">
+            {/* Borde dorado */}
+            <div 
+              className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-300"
+              style={{
+                border: '2px solid #D6B77A',
+                zIndex: 1,
+                opacity: 0.7
+              }}
+            />
+            {/* Efecto de brillo al hacer hover */}
+            <div 
+              className="absolute inset-0 rounded-2xl pointer-events-none transition-all duration-300 opacity-0 group-hover:opacity-100"
+              style={{
+                boxShadow: '0 0 20px rgba(214, 183, 122, 0.7)',
+                zIndex: 0
+              }}
+            />
+            <div className="p-8 relative z-10">
               {/* Icono */}
               <div className="w-16 h-16 flex items-center justify-center bg-[#F4F4F5] rounded-full mb-6 group-hover:bg-[#D6B77A] transition-colors duration-300">
                 <div className="text-[#D6B77A] group-hover:text-white transition-colors duration-300">
@@ -128,7 +151,7 @@ const Services: React.FC = () => (
       </div>
       
       {/* Llamado a la acción */}
-      <div className="mt-20 text-center">
+      <div className="mt-20 text-center relative z-10">
         <p className="text-[#6B7280] mb-6">¿Necesitas un servicio personalizado?</p>
         <Button 
           variant="primary" 

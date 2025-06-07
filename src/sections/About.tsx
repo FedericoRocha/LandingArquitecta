@@ -3,7 +3,103 @@ import SectionWrapper from '../components/SectionWrapper';
 import Button from '../components/Button';
 import perfilImage from '../assets/images/perfil.jpeg';
 
+// Estilos base para la tarjeta
+const baseCardStyle: React.CSSProperties = {
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  backfaceVisibility: 'hidden',
+  borderRadius: '0.5rem',
+  padding: '0.75rem',
+  backgroundColor: 'white',
+  border: '1px solid rgba(214, 183, 122, 0.3)',
+  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.08)',
+  transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease',
+  overflow: 'hidden'
+};
+
+
+const cardContainerStyle: React.CSSProperties = {
+  transformStyle: 'preserve-3d',
+  transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+  WebkitTransformStyle: 'preserve-3d',
+  width: '100%',
+  height: '100%',
+  position: 'relative',
+  cursor: 'pointer'
+};
+
+// Estilo para el frente de la tarjeta
+const frontCardStyle: React.CSSProperties = {
+  ...baseCardStyle,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+  background: 'linear-gradient(135deg, #fff 0%, #f9fafb 100%)',
+  '--tw-ring-color': 'rgba(214, 183, 122, 0.5)'
+} as React.CSSProperties;
+
+// Estilo para el reverso de la tarjeta
+const backCardStyle: React.CSSProperties = {
+  ...baseCardStyle,
+  transform: 'rotateY(180deg)',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  background: 'linear-gradient(135deg, #fff 0%, #f9fafb 100%)',
+  borderColor: 'rgba(214, 183, 122, 0.5)'
+};
+
+// Estilo para el efecto de borde dorado
+const borderGlowStyle: React.CSSProperties = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  borderRadius: '0.5rem',
+  padding: '1px',
+  background: 'linear-gradient(135deg, rgba(214, 183, 122, 0.3) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, rgba(214, 183, 122, 0.3) 100%)',
+  WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+  WebkitMaskComposite: 'xor',
+  maskComposite: 'exclude',
+  pointerEvents: 'none'
+};
+
 const About: React.FC = () => {
+  // Estado para controlar el giro de la tarjeta (solo en desktop)
+  const [isFlipped, setIsFlipped] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  // Detectar si es móvil
+  React.useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Verificar al cargar
+    checkIfMobile();
+    
+    // Y si cambia el tamaño de la ventana
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  // Manejar hover solo en desktop
+  const handleMouseEnter = () => {
+    if (!isMobile) {
+      setIsFlipped(true);
+    }
+  };
+  
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      setIsFlipped(false);
+    }
+  };
+
   return (
     <SectionWrapper 
       id="sobre" 
@@ -23,7 +119,7 @@ const About: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Columna de la imagen */}
           <div className="relative">
-            <div className="relative z-10 overflow-hidden rounded-lg shadow-2xl w-full h-[28rem] flex items-center justify-center bg-gray-50 p-4 transition-transform duration-700 hover:scale-105 hover:shadow-xl">
+            <div className="relative z-10 overflow-hidden rounded-lg shadow-2xl w-full h-[28rem] flex items-center justify-center bg-gray-50 p-2 transition-transform duration-700 hover:scale-105 hover:shadow-xl border-2 border-[#D6B77A] md:border-0">
               <div className="w-full h-full relative">
                 <img 
                   src={perfilImage} 
@@ -32,13 +128,58 @@ const About: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="absolute -bottom-6 -right-6 w-full h-full border-2 border-[#D6B77A] rounded-lg -z-0"></div>
+            <div className="hidden md:block absolute -bottom-6 -right-6 w-full h-full border-2 border-[#D6B77A] rounded-lg -z-0"></div>
             
-            {/* Experiencia destacada */}
-            <div className="absolute -bottom-4 -left-4 bg-white p-4 shadow-lg rounded-lg z-20 max-w-[200px]">
-              <div className="text-3xl font-bold text-[#2C3E50] mb-1">4+</div>
-              <div className="text-xs text-[#6B7280]">Años de experiencia en diseño arquitectónico</div>
-            </div>
+            {/* Tarjeta de experiencia con efecto flip */}
+            {isMobile ? (
+              // Versión estática para móviles
+              <div className="absolute -bottom-2 -left-2 z-20 w-[140px] h-20 sm:w-[160px] sm:h-24 bg-white shadow-lg rounded-lg p-4 flex flex-col justify-center items-center">
+                <div className="text-2xl sm:text-3xl font-bold text-[#2C3E50] mb-0.5">4+</div>
+                <div className="text-[11px] sm:text-xs font-medium text-[#6B7280] tracking-wide leading-tight">Años de experiencia</div>
+              </div>
+            ) : (
+              // Versión con efecto flip para escritorio
+              <div 
+                className="absolute -bottom-2 -left-2 z-20 w-[200px] h-28" 
+                style={{ perspective: '1000px' }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
+                <div 
+                  className="relative w-full h-full"
+                  style={{
+                    ...cardContainerStyle,
+                    transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0)',
+                    WebkitTransform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0)'
+                  }}
+                >
+                  {/* Efecto de borde dorado */}
+                  <div style={borderGlowStyle}></div>
+                  
+                  {/* Frente de la tarjeta */}
+                  <div style={frontCardStyle}>
+                    <div className="relative z-10">
+                      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2C3E50] mb-0.5">4+</div>
+                      <div className="text-[11px] sm:text-xs font-medium text-[#6B7280] tracking-wide leading-tight">Años de experiencia</div>
+                    </div>
+                  </div>
+                  
+                  {/* Reverso de la tarjeta */}
+                  <div style={backCardStyle}>
+                    <div className="text-xs text-[#4B5563] space-y-1.5">
+                      <div className="flex items-center">
+                        <div className="w-1.5 h-1.5 bg-[#D6B77A] rounded-full mr-2 flex-shrink-0"></div>
+                        <span className="font-medium">+10 Proyectos</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-1.5 h-1.5 bg-[#D6B77A] rounded-full mr-2 flex-shrink-0"></div>
+                        <span className="font-medium">Arquitecta Certificada</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Columna del texto */}

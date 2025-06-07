@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { FiInstagram, FiLinkedin, FiMail, FiPhone, FiMapPin } from 'react-icons/fi';
 import ScrollLink from './ScrollLink';
 
@@ -180,8 +181,12 @@ const Footer: React.FC = () => {
             © {currentYear} Tamara Gomez. Todos los derechos reservados.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-[#6B7280] hover:text-[#D6B77A] text-sm transition-colors">Política de Privacidad</a>
-            <a href="#" className="text-[#6B7280] hover:text-[#D6B77A] text-sm transition-colors">Términos</a>
+            <Link to="/politica-de-privacidad" className="text-[#6B7280] hover:text-[#D6B77A] text-sm transition-colors">
+              Política de Privacidad
+            </Link>
+            <Link to="/terminos-de-servicio" className="text-[#6B7280] hover:text-[#D6B77A] text-sm transition-colors">
+              Términos de Servicio
+            </Link>
           </div>
         </div>
       </div>
