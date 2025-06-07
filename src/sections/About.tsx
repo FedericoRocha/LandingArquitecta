@@ -90,10 +90,10 @@ const About: React.FC = () => {
               </div>
             </div>
             
-            <div className="mt-8">
+            <div className="mt-8 text-center md:text-left">
               <Button 
                 variant="primary" 
-                className="bg-[#2C3E50] hover:bg-[#1F2937] text-white px-8 py-4 text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl mr-4"
+                className="bg-[#2C3E50] hover:bg-[#1F2937] text-white px-8 py-4 text-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl md:mr-4"
                 onClick={() => window.open('https://www.linkedin.com/in/tu-perfil', '_blank')}
               >
                 <svg className="w-5 h-5 mr-2 inline-block" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

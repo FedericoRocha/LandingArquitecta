@@ -44,36 +44,43 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav 
-      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white shadow-md py-2' 
-          : 'bg-white/90 py-4 backdrop-blur-sm'
-      }`}
-    >
+    <div className="relative">
+      <nav 
+        className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ease-in-out ${
+          scrolled 
+            ? 'bg-white shadow-md py-1 border-b border-gray-100 after:content-[""] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-gradient-to-r after:from-transparent after:via-[#D6B77A]/80 after:to-transparent after:opacity-100' 
+            : 'bg-white/95 py-2 backdrop-blur-sm shadow-sm after:opacity-0 after:transition-opacity after:duration-300'
+        }`}
+      >
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <ScrollLink 
             to="hero" 
-            className="font-serif text-2xl font-bold text-[#2C3E50] cursor-pointer hover:text-[#D6B77A] transition-colors"
+            className="font-serif text-2xl font-bold text-[#2C3E50] cursor-pointer hover:text-[#D6B77A] transition-all duration-300 transform hover:scale-105"
           >
-            Tamara Gomez
+            <span className="relative">
+              Tamara Gomez
+              <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#D6B77A] transform scale-x-0 hover:scale-x-100 transition-transform duration-300"></span>
+            </span>
           </ScrollLink>
 
           {/* Menú de escritorio */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <div key={item.id} className="relative">
                 <ScrollLink 
                   to={item.id}
-                  className={`px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`text-[15px] font-medium relative group transition-all duration-200 ${
                     activeSection === item.id
                       ? 'text-[#D6B77A] font-semibold'
-                      : 'text-[#2C3E50] hover:text-[#D6B77A]'
+                      : 'text-[#2C3E50] hover:text-[#D6B77A] hover:bg-gray-50 rounded-md px-3 py-1.5'
                   }`}
                 >
                   {item.label}
+                  <span className={`absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-[#D6B77A] transition-all duration-200 group-hover:w-3/4 ${
+                    activeSection === item.id ? 'w-3/4' : ''
+                  }`}></span>
                 </ScrollLink>
                 {activeSection === item.id && (
                   <motion.div 
@@ -92,9 +99,10 @@ const Navbar: React.FC = () => {
 
           {/* Botón móvil */}
           <button 
-            className="md:hidden p-2 text-[#2C3E50] focus:outline-none"
+            className="md:hidden p-2 text-[#2C3E50] focus:outline-none transition-transform duration-200 hover:scale-110"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Menú de navegación"
+            aria-expanded={mobileMenuOpen}
           >
             <svg 
               className="w-6 h-6" 
@@ -117,13 +125,18 @@ const Navbar: React.FC = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
+            initial={{ opacity: 0, height: 0, y: -20 }}
+            animate={{ opacity: 1, height: 'auto', y: 0 }}
+            exit={{ opacity: 0, height: 0, y: -20 }}
+            transition={{ 
+              duration: 0.4,
+              ease: [0.4, 0, 0.2, 1],
+              height: { duration: 0.4 },
+              opacity: { duration: 0.3 }
+            }}
+            className="md:hidden overflow-hidden bg-white/95 backdrop-blur-sm shadow-lg"
           >
-            <div className="px-6 py-4 space-y-4 bg-white border-t border-gray-100">
+            <div className="px-6 py-4 space-y-2">
               {navItems.map((item) => (
                 <ScrollLink
                   key={item.id}
@@ -142,7 +155,8 @@ const Navbar: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+      </nav>
+    </div>
   );
 };
 
