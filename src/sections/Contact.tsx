@@ -33,14 +33,14 @@ const Contact: React.FC = () => {
   ];
 
   return (
-    <SectionWrapper id="contacto" className="bg-white py-24 relative overflow-hidden">
+    <SectionWrapper id="contacto" className="bg-white py-24 pt-16 md:pt-24 relative overflow-hidden">
       {/* Elemento decorativo */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D6B77A] to-[#2C3E50]"></div>
       
       <div className="max-w-7xl mx-auto px-6">
         {/* Encabezado */}
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-2 bg-[#F4F4F5] text-[#D6B77A] font-medium rounded-full text-sm mb-4 shadow-sm">
+          <span className="inline-block px-4 py-2 bg-[#F4F4F5] text-[#D6B77A] font-medium rounded-full text-sm mb-4 shadow-sm mt-8 md:mt-12">
             Contáctame
           </span>
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#111827] mb-6">

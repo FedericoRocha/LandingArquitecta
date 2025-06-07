@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
             to="hero" 
             className="font-serif text-2xl font-bold text-[#2C3E50] cursor-pointer hover:text-[#D6B77A] transition-colors"
           >
-            Tamara Gómez
+            Tamara Gomez
           </ScrollLink>
 
           {/* Menú de escritorio */}

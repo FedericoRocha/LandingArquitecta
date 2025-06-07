@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
       title: 'Redes Sociales',
       items: [
         { icon: <FiInstagram className="w-5 h-5" />, text: '@tamara.arquitecta', href: 'https://instagram.com' },
-        { icon: <FiLinkedin className="w-5 h-5" />, text: 'Tamara Gómez', href: 'https://linkedin.com' }
+        { icon: <FiLinkedin className="w-5 h-5" />, text: 'Tamara Gomez', href: 'https://linkedin.com' }
       ]
     }
   ];
@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Contenido principal - Versión móvil */}
         <div className="md:hidden text-center mb-8">
-          <h3 className="font-serif text-2xl font-bold text-[#2C3E50] mb-4">Tamara Gómez</h3>
+          <h3 className="font-serif text-2xl font-bold text-[#2C3E50] mb-4">Tamara Gomez</h3>
           <p className="text-[#6B7280] mb-6">
             Transformando ideas en espacios que inspiran, innovan y perduran en el tiempo.
           </p>
@@ -107,7 +107,7 @@ const Footer: React.FC = () => {
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Logo y descripción */}
           <div className="lg:col-span-1">
-            <h3 className="font-serif text-2xl font-bold text-[#2C3E50] mb-4">Tamara Gómez</h3>
+            <h3 className="font-serif text-2xl font-bold text-[#2C3E50] mb-4">Tamara Gomez</h3>
             <p className="text-[#6B7280] mb-6">
               Transformando ideas en espacios que inspiran, innovan y perduran en el tiempo.
             </p>
@@ -177,7 +177,7 @@ const Footer: React.FC = () => {
         {/* Derechos de autor */}
         <div className="flex flex-col md:flex-row justify-between items-center text-center">
           <p className="text-[#6B7280] text-sm mb-4 md:mb-0">
-            © {currentYear} Tamara Gómez. Todos los derechos reservados.
+            © {currentYear} Tamara Gomez. Todos los derechos reservados.
           </p>
           <div className="flex space-x-6">
             <a href="#" className="text-[#6B7280] hover:text-[#D6B77A] text-sm transition-colors">Política de Privacidad</a>

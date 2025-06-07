@@ -27,7 +27,7 @@ const About: React.FC = () => {
               <div className="w-full h-full relative">
                 <img 
                   src={perfilImage} 
-                  alt="Tamara Gómez - Arquitecta" 
+                  alt="Tamara Gomez - Arquitecta" 
                   className="w-full h-full object-contain"
                 />
               </div>

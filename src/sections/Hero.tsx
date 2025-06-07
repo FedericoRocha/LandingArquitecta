@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Texto */}
-          <div className="text-left">
+          <div className="text-center md:text-left">
             <div className="inline-block mb-6 px-4 py-2 bg-[#F4F4F5] rounded-full">
               <span className="text-[#D6B77A] font-medium">Bienvenidos a mi portfolio</span>
             </div>
@@ -29,19 +29,19 @@ const Hero: React.FC = () => {
               Tamara <span className="text-[#2C3E50]">Goméz</span>
             </h1>
             
-            <div className="mb-8">
-              <h2 className="inline-block font-serif text-3xl md:text-5xl font-bold text-[#2C3E50] relative z-10 px-6 py-3 bg-white border-2 border-[#D6B77A] rounded-lg shadow-lg transform rotate-1 hover:rotate-0 transition-transform duration-300">
+            <div className="mb-8 flex justify-center md:justify-start">
+              <h2 className="inline-block font-serif text-3xl md:text-5xl font-bold text-[#2C3E50] relative z-10 px-6 py-3 bg-white border-2 border-[#D6B77A] rounded-lg shadow-lg md:transform md:rotate-1 hover:rotate-0 transition-transform duration-300">
                 <span className="relative z-10">Arquitecta</span>
                 <div className="absolute -inset-1 bg-[#D6B77A] bg-opacity-20 -z-0 rounded-md"></div>
               </h2>
             </div>
             
-            <p className="font-sans text-[#6B7280] text-lg md:text-xl mb-10 leading-relaxed max-w-2xl">
+            <p className="font-sans text-[#6B7280] text-lg md:text-xl mb-10 leading-relaxed max-w-2xl mx-auto md:mx-0">
               Transformo ideas en espacios que inspiran, innovan y perduran en el tiempo. 
               Especializada en diseño arquitectónico que combina funcionalidad, estética y sostenibilidad.
             </p>
             
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <ScrollLink to="proyectos" className="block">
                 <Button 
                   variant="primary" 
