@@ -23,16 +23,16 @@ const Hero: React.FC = () => {
   return (
     <SectionWrapper 
       id="hero" 
-      className="relative min-h-[calc(100vh-6rem)] md:min-h-screen flex items-center justify-center bg-white overflow-hidden pt-24 md:pt-0 pb-16 md:pb-0"
+      className="relative min-h-[calc(100vh-6rem)] md:min-h-screen flex items-center justify-center bg-white dark:bg-[#18181b] overflow-hidden pt-24 md:pt-0 pb-16 md:pb-0 transition-colors duration-300"
       withTopDivider
     >
       {/* Fondo con partículas animadas */}
       <ParticlesBackground />
       
       {/* Formas geométricas sutiles */}
-      <div className="absolute inset-0 z-0 opacity-10">
+      <div className="absolute inset-0 z-0 opacity-10 dark:opacity-5">
         <motion.div 
-          className="absolute top-1/4 -right-20 w-96 h-96 bg-[#D6B77A] rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          className="absolute top-1/4 -right-20 w-96 h-96 bg-[#D6B77A] dark:bg-[#E9C46A] rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-xl opacity-20 dark:opacity-10"
           animate={{
             y: [0, 20, 0],
             x: [0, 10, 0]
@@ -44,7 +44,7 @@ const Hero: React.FC = () => {
           }}
         />
         <motion.div 
-          className="absolute top-1/2 -left-20 w-96 h-96 bg-[#2C3E50] rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          className="absolute top-1/2 -left-20 w-96 h-96 bg-[#2C3E50] dark:bg-[#3A506B] rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-xl opacity-20 dark:opacity-10"
           animate={{
             y: [0, -20, 0],
             x: [0, -10, 0]
@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
           }}
         />
         <motion.div 
-          className="absolute top-3/4 right-1/4 w-96 h-96 bg-[#A3B18A] rounded-full mix-blend-multiply filter blur-xl opacity-20"
+          className="absolute top-3/4 right-1/4 w-96 h-96 bg-[#A3B18A] dark:bg-[#84A98C] rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-xl opacity-20 dark:opacity-10"
           animate={{
             y: [0, 15, 0],
             x: [0, 15, 0]
@@ -85,10 +85,10 @@ const Hero: React.FC = () => {
               whileHover={{ scale: 1.03 }}
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
-              <span className="text-[#D6B77A] font-medium text-sm tracking-wide">BIENVENIDOS A MI PORTAFOLIO</span>
+              <span className="text-[#D6B77A] dark:text-[#D6B77A] font-medium text-sm tracking-wide">BIENVENIDOS A MI PORTAFOLIO</span>
             </motion.div>
             
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-7.5xl text-[#111827] font-bold mb-6 leading-tight w-full">
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-7.5xl text-[#111827] dark:text-[#2C3E50] font-bold mb-6 leading-tight w-full">
               <motion.span 
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -98,7 +98,7 @@ const Hero: React.FC = () => {
                 Tamara
               </motion.span>
               <motion.span 
-                className="text-[#2C3E50] block mt-1"
+                className="text-[#2C3E50] dark:text-[#2C3E50] block mt-1"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
@@ -113,7 +113,7 @@ const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <h2 className="inline-block font-serif text-3xl md:text-4xl font-bold text-[#2C3E50] relative z-10 px-6 py-3 bg-white border-2 border-[#D6B77A] rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+              <h2 className="inline-block font-serif text-3xl md:text-4xl font-bold text-[#2C3E50] dark:text-[#E5E7EB] relative z-10 px-6 py-3 bg-white dark:bg-gray-800 border-2 border-[#D6B77A] rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
                 <span className="relative z-10">Arquitecta</span>
                 <div className="absolute -inset-1 bg-[#D6B77A] bg-opacity-20 -z-0 rounded-md"></div>
               </h2>
@@ -126,7 +126,7 @@ const Hero: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.5 }}
-                    className="font-sans text-[#4B5563] text-lg md:text-xl mb-6 leading-relaxed max-w-2xl italic"
+                    className="font-sans text-[#4B5563] dark:text-[#2C3E50] text-lg md:text-xl mb-6 leading-relaxed max-w-2xl italic"
                   >
                     "{phrases[currentPhrase]}"
                   </motion.p>
@@ -135,7 +135,7 @@ const Hero: React.FC = () => {
             </motion.div>
             
             <motion.p 
-              className="font-sans text-[#4B5563] text-lg md:text-xl mb-10 leading-relaxed max-w-2xl text-center md:text-left"
+              className="font-sans text-[#4B5563] dark:text-[#2C3E50] text-lg md:text-xl mb-10 leading-relaxed max-w-2xl text-center md:text-left"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.5 }}
