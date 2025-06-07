@@ -1,7 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import SectionWrapper from '../components/SectionWrapper';
 import { FiChevronLeft, FiChevronRight, FiStar } from 'react-icons/fi';
+import { useSwipeable } from 'react-swipeable';
 
 const testimonials = [
   {
@@ -31,19 +32,49 @@ const testimonials = [
 ];
 
 const Testimonials: React.FC = () => {
-  const [currentTestimonial, setCurrentTestimonial] = React.useState(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [swiping, setSwiping] = useState(false);
+  const [swipeDirection, setSwipeDirection] = useState(0);
 
-  const nextTestimonial = () => {
+  const nextTestimonial = useCallback(() => {
+    setSwipeDirection(1);
     setCurrentTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
+  }, []);
 
-  const prevTestimonial = () => {
+  const prevTestimonial = useCallback(() => {
+    setSwipeDirection(-1);
     setCurrentTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
+  }, []);
 
   const goToTestimonial = (index: number) => {
+    setSwipeDirection(index > currentTestimonial ? 1 : -1);
     setCurrentTestimonial(index);
   };
+
+  // Configuración para el deslizamiento táctil
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      if (!swiping) {
+        nextTestimonial();
+      }
+      setSwiping(false);
+    },
+    onSwipedRight: () => {
+      if (!swiping) {
+        prevTestimonial();
+      }
+      setSwiping(false);
+    },
+    onSwiping: () => {
+      setSwiping(true);
+    },
+    trackMouse: false,
+    trackTouch: true,
+    preventScrollOnSwipe: true,
+    delta: 10,
+    swipeDuration: 500,
+    touchEventOptions: { passive: true },
+  });
 
   return (
     <SectionWrapper 
@@ -51,7 +82,6 @@ const Testimonials: React.FC = () => {
       className="bg-white pt-24 pb-16 overflow-hidden"
       withTopDivider
     >
-      
       <div className="max-w-7xl mx-auto px-6">
         {/* Encabezado */}
         <div className="text-center mb-12">
@@ -69,7 +99,7 @@ const Testimonials: React.FC = () => {
           {/* Flechas de navegación */}
           <button 
             onClick={prevTestimonial}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 bg-white p-3 rounded-full shadow-lg z-10 text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white transition-colors duration-300 hidden md:block"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 bg-white p-3 rounded-full shadow-lg z-20 text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white transition-colors duration-300 hidden md:block"
             aria-label="Anterior testimonio"
           >
             <FiChevronLeft className="w-6 h-6" />
@@ -77,22 +107,46 @@ const Testimonials: React.FC = () => {
           
           <button 
             onClick={nextTestimonial}
-            className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 bg-white p-3 rounded-full shadow-lg z-10 text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white transition-colors duration-300 hidden md:block"
+            className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 bg-white p-3 rounded-full shadow-lg z-20 text-[#2C3E50] hover:bg-[#2C3E50] hover:text-white transition-colors duration-300 hidden md:block"
             aria-label="Siguiente testimonio"
           >
             <FiChevronRight className="w-6 h-6" />
           </button>
 
           {/* Testimonial activo */}
-          <div className="relative min-h-[320px] md:min-h-[280px] flex items-center">
-            <motion.div
-              key={currentTestimonial}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white rounded-2xl shadow-xl p-8 md:p-10 w-full"
-            >
+          <div 
+            className="relative min-h-[320px] md:min-h-[280px] flex items-center touch-none"
+            {...handlers}
+          >
+            <AnimatePresence mode="wait" custom={swipeDirection}>
+              <motion.div
+                key={currentTestimonial}
+                custom={swipeDirection}
+                initial={{ opacity: 0, x: swipeDirection > 0 ? 100 : -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: swipeDirection > 0 ? -100 : 100 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="relative bg-white rounded-2xl shadow-xl p-8 md:p-10 w-full overflow-hidden group"
+              >
+              {/* Borde dorado */}
+              <div className="absolute inset-0 border-3 border-transparent group-hover:border-[#D6B77A] transition-all duration-500 rounded-2xl pointer-events-none z-0"></div>
+              
+              {/* Efecto de brillo al hacer hover */}
+              <div 
+                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  boxShadow: 'inset 0 0 30px rgba(214, 183, 122, 0.2)',
+                  border: '1px solid rgba(214, 183, 122, 0.3)'
+                }}
+              ></div>
+              
+              {/* Resplandor exterior sutil */}
+              <div 
+                className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  boxShadow: '0 0 20px rgba(214, 183, 122, 0.2)'
+                }}
+              ></div>
               <div className="flex flex-col md:flex-row items-center h-full">
                 <div className="w-full md:w-1/3 mb-6 md:mb-0 md:pr-8">
                   <div className="bg-gradient-to-br from-[#2C3E50] to-[#D6B77A] p-1 rounded-full inline-block">
@@ -129,7 +183,8 @@ const Testimonials: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Indicadores */}

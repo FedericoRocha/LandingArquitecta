@@ -86,14 +86,45 @@ const Projects: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {/* Imagen de fondo */}
-              <div className="absolute inset-0 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+              {/* Imagen de fondo con borde dorado mejorado */}
+              <div className="absolute inset-0 overflow-hidden group">
+                {/* Capa de borde dorado exterior */}
+                <div 
+                  className="absolute inset-0 border-3 border-transparent group-hover:border-[#D6B77A] transition-all duration-500 rounded-xl z-10 pointer-events-none"
+                  style={{
+                    boxShadow: '0 0 0 1px rgba(214, 183, 122, 0.3) inset'
+                  }}
+                ></div>
+                
+                {/* Contenedor de la imagen con borde interior */}
+                <div className="absolute inset-1.5 rounded-lg overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                
+                {/* Overlay de gradiente */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                
+                {/* Efecto de brillo dorado al hacer hover */}
+                <div 
+                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500" 
+                  style={{
+                    boxShadow: 'inset 0 0 40px rgba(214, 183, 122, 0.4)',
+                    border: '1px solid rgba(214, 183, 122, 0.5)'
+                  }}
+                ></div>
+                
+                {/* Efecto de resplandor exterior */}
+                <div 
+                  className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    boxShadow: '0 0 25px rgba(214, 183, 122, 0.4)',
+                    zIndex: -1
+                  }}
+                ></div>
               </div>
 
               {/* Contenido */}

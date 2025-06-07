@@ -62,9 +62,22 @@ const Contact: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100"
+              className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
             >
-              <div className="text-center">
+              {/* Borde dorado */}
+              <div className="absolute inset-0 border-3 border-transparent group-hover:border-[#D6B77A] transition-all duration-500 rounded-xl pointer-events-none z-0"></div>
+              
+              {/* Efecto de brillo al hacer hover */}
+              <div 
+                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  boxShadow: 'inset 0 0 30px rgba(214, 183, 122, 0.2)',
+                  border: '1px solid rgba(214, 183, 122, 0.3)'
+                }}
+              ></div>
+              
+              {/* Contenido de la tarjeta */}
+              <div className="relative z-10 text-center">
                 <div className="inline-block p-4 bg-[#F9FAFB] rounded-full mb-4">
                   {method.icon}
                 </div>
