@@ -62,23 +62,32 @@ const Contact: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+              className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 relative overflow-hidden group"
             >
               {/* Borde dorado fijo */}
               <div className="absolute inset-0 border-2 border-[#D6B77A] rounded-xl pointer-events-none z-0"></div>
               
-              {/* Efecto de brillo sutil */}
+              {/* Efecto de brillo al hacer hover */}
               <div 
-                className="absolute inset-0 rounded-xl pointer-events-none"
+                className="absolute inset-0 rounded-xl pointer-events-none transition-all duration-300 opacity-0 group-hover:opacity-100"
                 style={{
-                  boxShadow: 'inset 0 0 20px rgba(214, 183, 122, 0.15)'
+                  boxShadow: '0 0 25px rgba(214, 183, 122, 0.4)',
+                  zIndex: 0
                 }}
               ></div>
               
               {/* Contenido de la tarjeta */}
-              <div className="relative z-10 text-center">
-                <div className="inline-block p-4 bg-[#F9FAFB] rounded-full mb-4">
-                  {method.icon}
+              <div className="relative z-10 text-center group-hover:scale-105 transition-transform duration-300">
+                {/* Contenedor del icono con efecto hover */}
+                <div className="w-16 h-16 flex items-center justify-center bg-[#F4F4F5] rounded-full mb-6 mx-auto transition-all duration-300 group-hover:bg-[#D6B77A] group-hover:scale-110">
+                  <div className="text-[#D6B77A] group-hover:text-white transition-colors duration-300">
+                    {React.cloneElement(method.icon, { 
+                      className: 'w-8 h-8',
+                      fill: 'none',
+                      stroke: 'currentColor',
+                      strokeWidth: 1.5
+                    })}
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold text-[#2C3E50] mb-2">{method.title}</h3>
                 <a 
