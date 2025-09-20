@@ -1,7 +1,7 @@
 import React from 'react';
 import SectionWrapper from '../components/SectionWrapper';
 import Button from '../components/Button';
-import perfilImage from '../assets/images/perfil.jpeg';
+// import perfilImage from '../assets/images/perfil.jpeg';
 
 // Estilos base para la tarjeta
 const baseCardStyle: React.CSSProperties = {
@@ -122,7 +122,6 @@ const About: React.FC = () => {
             <div className="relative z-10 overflow-hidden rounded-lg shadow-2xl w-full h-[28rem] flex items-center justify-center bg-gray-50 p-2 transition-transform duration-700 hover:scale-105 hover:shadow-xl border-2 border-[#D6B77A] md:border-0">
               <div className="w-full h-full relative">
                 <img 
-                  src={perfilImage} 
                   alt="Tamara Gomez - Arquitecta" 
                   className="w-full h-full object-contain"
                 />
